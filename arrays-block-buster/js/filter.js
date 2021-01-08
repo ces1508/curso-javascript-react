@@ -1,9 +1,8 @@
 import {
-  renderMovieListFromMap
+  renderMovieList
 } from './render.js'
 
 import {
-  movieList,
   all,
   popular as mostValued,
   notPopular as leastValued
@@ -12,10 +11,10 @@ import {
 filter.addEventListener('change', function () {
   switch (this.value) {
     case 'most-valued':
-      return renderMovieListFromMap(mostValued, movieList)
+      return renderMovieList(mostValued)
     case 'least-valued':
-      return renderMovieListFromMap(leastValued, movieList)
+      return renderMovieList(leastValued,)
     default:
-      return renderMovieListFromMap(all, movieList)
+      return renderMovieList(all)
   }
 })

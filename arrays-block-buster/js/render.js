@@ -1,5 +1,5 @@
 
-export function renderMovieListFromMap(list, map) {
+function renderMovieListFromMap(list, map) {
   cleanMovieList()
   list.forEach(movieId => renderElement(map.get(movieId)))
 }
@@ -31,4 +31,9 @@ export default function renderMovieList(list) {
   cleanMovieList()
   // console.table(list, ['title', 'poster_path', 'vote_average', 'id'])
   list.forEach(renderElement)
+}
+
+export {
+  renderMovieListFromMap,
+  renderMovieList
 }

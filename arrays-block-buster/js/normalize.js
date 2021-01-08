@@ -5,25 +5,37 @@ const movieList = rawMoviesList.reduce((list, movie) => {
   return list
 }, new Map())
 
+const has = Object.prototype.hasOwnProperty
 
-const all = rawMoviesList.map(movie => movie.id)
+// const all = rawMoviesList.map(movie => movie.id)
 
-const popular = rawMoviesList.reduce((list, movie) => {
+// const popular = rawMoviesList.reduce((list, movie) => {
+//   if (movie.vote_average > 7) {
+//     list.push(movie.id)
+//   }
+//   return list
+// }, [])
+
+// const notPopular = rawMoviesList.reduce((list, movie) => {
+//   if (movie.vote_average <= 7) {
+//     list.push(movie.id)
+//   }
+//   return list
+// }, [])
+
+
+const { notPopular, popular } = rawMoviesList.reduce((prev, movie) => {
   if (movie.vote_average > 7) {
-    list.push(movie.id)
+    has.call(prev, 'popular') ? prev.popular.push(movie) : prev.popular = [movie]
+  } else {
+    has.call(prev, 'notPopular') ? prev.notPopular.push(movie) : prev.notPopular = [movie]
   }
-  return list
-}, [])
+  return prev
+}, {})
 
-const notPopular = rawMoviesList.reduce((list, movie) => {
-  if (movie.vote_average <= 7) {
-    list.push(movie.id)
-  }
-  return list
-}, [])
 
+const all = [...popular, ...notPopular]
 export {
-  movieList,
   all,
   popular,
   notPopular

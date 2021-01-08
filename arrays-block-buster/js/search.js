@@ -8,8 +8,7 @@ search.addEventListener('submit', function (event) {
   const formData = new FormData(this)
   const query = formData.get('title')
   const movies = searchMovie(query)
-  console.log(movies)
-  if (movies) {
+  if (movies.length > 0) {
     return render(movies)
   }
   return alert('No enconramos tu película')
@@ -29,10 +28,12 @@ function findById(id) {
 }
 
 function searchMovie(query) {
-  if (isNaN(query)) {
+  if (isNaN(parseInt(query))) {
     return filterByTitle(query)
   }
-  return [findById(query)]
+
+  const movie  = findById(query)
+  if (movie) return [movie]
+  return []
   // return findById(query)
 }
-
